@@ -1,5 +1,5 @@
 #!/bin/bash
-# Onboards mock relying party OIDC helm
+# Installs mock relying party onboarder OIDC helm
 ## Usage: ./install.sh [kubeconfig]
 
 if [ $# -ge 1 ] ; then
@@ -21,7 +21,7 @@ if [ "$flag" = "n" ]; then
 fi
 
 NS=esignet
-CHART_VERSION=0.0.1-develop
+CHART_VERSION=1.5.0-es-develop
 
 echo Create $NS namespace
 kubectl create ns $NS || true
@@ -89,6 +89,34 @@ function installing_onboarder() {
       fi
     done
 
+    while true; do
+      read -p "Is esignet deployed with default plugins? (y/n): " esignet_ans
+      if [[ "$esignet_ans" == "y" || "$esignet_ans" == "Y" ]]; then
+        while true; do
+          read -p "Please confirm with y for MOSIP ID plugins (y/n): " mosipid_ans
+          if [[ "$mosipid_ans" == "y" || "$mosipid_ans" == "Y" ]]; then
+            mosipid="true"
+            MOSIPID_OPTION="--set onboarding.variables.mosipid=$mosipid"
+            break
+          elif [[ "$mosipid_ans" == "n" || "$mosipid_ans" == "N" ]]; then
+            mosipid="false"
+            MOSIPID_OPTION="--set onboarding.variables.mosipid=$mosipid"
+            break
+          else
+            echo "Invalid response for MOSIP ID plugins. Please respond with y or n."
+          fi
+        done
+        break
+      elif [[ "$esignet_ans" == "n" || "$esignet_ans" == "N" ]]; then
+        mosipid="false"
+        MOSIPID_OPTION="--set onboarding.variables.mosipid=$mosipid"
+        break
+      else
+        echo "Invalid response for esignet. Please respond with y or n."
+      fi
+    done
+    echo "Helm option: $MOSIPID_OPTION"
+
     echo "Istio label"
     kubectl label ns $NS istio-injection=disabled --overwrite
 #    helm repo update
@@ -101,22 +129,21 @@ function installing_onboarder() {
     $COPY_UTIL secret keycloak keycloak $NS
     $COPY_UTIL secret keycloak-client-secrets keycloak $NS
 
-    echo $NFS_OPTION
-    echo $S3_OPTION
-    echo $push_reports_to_s3
-
     echo "Onboarding Mock Relying Party OIDC client"
-    helm -n $NS install esignet-mock-rp-onboarder ../../mosip-onboarding/helm/partner-onboarder/ \
+    helm -n $NS install esignet-mock-rp-onboarder mosip/partner-onboarder \
       $NFS_OPTION \
       $S3_OPTION \
+      $MOSIPID_OPTION \
       --set onboarding.variables.push_reports_to_s3=$push_reports_to_s3 \
       --set extraEnvVarsCM[0]=esignet-global \
       --set extraEnvVarsCM[1]=keycloak-env-vars \
       --set extraEnvVarsCM[2]=keycloak-host \
       $ENABLE_INSECURE \
       -f values.yaml \
-      --debug --wait --wait-for-jobs
-    echo "Partner onboarded successfully and reports are moved to S3 or NFS"
+      --version $CHART_VERSION \
+      --wait --wait-for-jobs
+    echo "Partner onboarder executed and reports are moved to S3 or NFS please check the same to make sure partner was onboarded sucessfully."
+    kubectl rollout restart deployment mock-relying-party-service -n esignet
     return 0
   fi
 }

@@ -16,16 +16,12 @@ import io.mosip.esignet.mock.identitysystem.validator.IdData;
 import lombok.Data;
 
 @Data
-@IdData
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IdentityData {
-	
-	@NotBlank(message = ErrorConstants.INVALID_INDIVIDUAL_ID)
+
 	String individualId;
 
 	String pin;
-
-    List<LanguageValue> name;
 
 	List<LanguageValue> fullName;
 

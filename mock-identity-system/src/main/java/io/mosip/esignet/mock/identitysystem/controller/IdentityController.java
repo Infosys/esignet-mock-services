@@ -11,13 +11,10 @@ import javax.validation.Valid;
 
 import io.mosip.esignet.mock.identitysystem.dto.*;
 import io.mosip.esignet.mock.identitysystem.dto.Error;
-import io.mosip.esignet.mock.identitysystem.validator.IdentitySchema;
-import io.mosip.kernel.core.exception.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import io.mosip.esignet.mock.identitysystem.exception.MockIdentityException;

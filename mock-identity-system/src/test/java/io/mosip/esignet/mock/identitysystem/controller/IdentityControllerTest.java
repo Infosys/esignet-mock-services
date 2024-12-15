@@ -116,7 +116,7 @@ public class IdentityControllerTest {
 		Mockito.doNothing().when(identityService).addIdentity(identityRequest);
 
 		mockMvc.perform(post("/identity").content(objectMapper.writeValueAsString(requestWrapper))
-						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.response.status").value("mock identity data created successfully"));
 	}
 
@@ -131,7 +131,7 @@ public class IdentityControllerTest {
 		Mockito.doNothing().when(identityService).addIdentity(identityRequest);
 
 		mockMvc.perform(post("/identity").content(objectMapper.writeValueAsString(requestWrapper))
-						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.errors").isNotEmpty())
 				.andExpect(jsonPath("$.errors[0].errorCode").value("invalid_individualid"));
 	}
@@ -176,14 +176,14 @@ public class IdentityControllerTest {
 				.andExpect(jsonPath("$.errors").isNotEmpty())
 				.andExpect(jsonPath("$.errors[0].errorCode").value("invalid_fullname"));
 	}
-
+	
 	@Test
 	public void getIdentity_withValidId_returnSuccessResponse() throws Exception {
 		identityRequest.setIndividualId("123456789");
 		Mockito.when(identityService.getIdentity(Mockito.anyString())).thenReturn(identityRequest);
 
 		mockMvc.perform(get("/identity/{individualId}", "123456789")
-						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.response.individualId").value("123456789"));
 	}
 

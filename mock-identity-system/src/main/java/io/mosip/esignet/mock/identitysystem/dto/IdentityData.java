@@ -8,11 +8,7 @@ package io.mosip.esignet.mock.identitysystem.dto;
 
 import java.util.List;
 
-import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.mosip.esignet.mock.identitysystem.util.ErrorConstants;
-import io.mosip.esignet.mock.identitysystem.validator.IdData;
 import lombok.Data;
 
 @Data

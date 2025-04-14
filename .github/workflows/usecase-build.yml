@@ -20,12 +20,13 @@ on:
       - develop
       - MOSIP*
       - release*
+      - INJICERT*
 
 jobs:
   build-maven-usecase-compass:
     uses: mosip/kattu/.github/workflows/maven-build.yml@master-java21
     with:
-      SERVICE_LOCATION: ./
+      SERVICE_LOCATION: ./usecase-compass
       BUILD_ARTIFACT: usecase-compass
     secrets:
       OSSRH_USER: ${{ secrets.OSSRH_USER }}

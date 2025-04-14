@@ -52,13 +52,13 @@ public class UserInfo {
     @Column(name = "eye_color")
     private String eyeColor;
 
-    @Column(name = "face_image_color")
+    @Column(name = "face_image_color", columnDefinition = "TEXT")
     @Basic(fetch = FetchType.LAZY)
-    private byte[] faceImageColor;
+    private String faceImageColor;
 
-    @Column(name = "face_image_grey")
+    @Column(name = "face_image_grey", columnDefinition = "TEXT")
     @Basic(fetch = FetchType.LAZY)
-    private byte[] faceImageGrey;
+    private String faceImageGrey;
 
     @Column(name = "first_name_primary")
     private String firstNamePrimary;

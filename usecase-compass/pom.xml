@@ -10,6 +10,7 @@
 
     <groupId>io.mosip.compass.admin</groupId>
     <artifactId>usecase-compass</artifactId>
+    <version>0.10.2-RC</version>
     <packaging>jar</packaging>
 
     <name>usecase-compass</name>

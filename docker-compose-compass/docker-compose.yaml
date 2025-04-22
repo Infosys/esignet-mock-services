@@ -1,0 +1,42 @@
+
+version: '3.8'
+
+services:
+  database:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./compass_service_init.sql:/docker-entrypoint-initdb.d/compass_service_init.sql
+    networks:
+      - network
+    ports:
+      - "5433:5432"
+
+  usecase-compass:
+    image: mosipqa/usecase-compass:MOSIP-41056
+    container_name: usecase-compass-server
+    user: root
+    ports:
+      - "8091:8091"
+    environment:
+      - container_user=mosip
+      - active_profile_env=default
+      - SPRING_CONFIG_NAME=compass
+      - SPRING_CONFIG_LOCATION=/home/mosip/config/
+    volumes:
+      - ./config/compass-default.properties:/home/mosip/config/compass-default.properties
+    networks:
+      - network
+    depends_on:
+      - database
+
+networks:
+  network:
+    name: mosip_network
+    external: false
+
+volumes:
+  cache:
+    driver: local

@@ -4,6 +4,7 @@ package io.mosip.compass.admin.service;
 
 import io.mosip.compass.admin.dto.UserInfoDTO;
 import io.mosip.compass.admin.dto.UserInfoResponseDTO;
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,4 +20,6 @@ public interface UserInfoService {
     List<UserInfoDTO> getAllUsers();
 
     String deleteMultipleUsers(List<UUID> userInfoIds);
+
+    String testDataProviderPlugin(String individualId) throws Exception;
 }

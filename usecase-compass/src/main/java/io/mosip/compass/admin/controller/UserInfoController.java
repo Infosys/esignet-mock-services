@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -80,5 +81,16 @@ public class UserInfoController {
             return ResponseEntity.internalServerError()
                     .body("Failed to delete users: " + e.getMessage());
         }
+    }
+
+//    @Operation(
+//            summary = "Fetch JSON Response",
+//            security = @SecurityRequirement(name = "bearerAuth")
+//    )
+//    @RequiresAdminAccess
+    @GetMapping("/json-response/{nationalUid}")
+    public ResponseEntity<String> fetchJSONResponse(@PathVariable String nationalUid) throws Exception {
+        String jsonObject = userInfoService.testDataProviderPlugin(nationalUid);
+        return new ResponseEntity<>(jsonObject, HttpStatus.OK);
     }
 }

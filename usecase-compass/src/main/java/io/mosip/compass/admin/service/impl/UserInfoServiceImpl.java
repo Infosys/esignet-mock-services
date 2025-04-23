@@ -5,14 +5,19 @@ import io.mosip.compass.admin.dto.UserInfoResponseDTO;
 import io.mosip.compass.admin.entity.UserInfo;
 import io.mosip.compass.admin.exception.AdminServerException;
 import io.mosip.compass.admin.mapper.UserInfoMapper;
+import io.mosip.compass.admin.repository.DataProviderRepository;
 import io.mosip.compass.admin.repository.UserInfoRepository;
 import io.mosip.compass.admin.service.UserInfoService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
+import static io.mosip.compass.admin.mapper.UserInfoMapper.log;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -22,6 +27,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
+
+    @Autowired
+    private DataProviderRepository dataProviderRepository;
+
 
     @Override
     @Transactional
@@ -55,6 +64,25 @@ public class UserInfoServiceImpl implements UserInfoService {
     public String deleteMultipleUsers(List<UUID> userInfoIds) {
         userInfoRepository.deleteAllByUserInfoIds(userInfoIds);
         return "Users with all userInfoIds deleted";
+    }
+
+    @Override
+    @Transactional
+    public String testDataProviderPlugin(String individualId) throws Exception {
+        try {
+            String queryString = "select * from user_info where national_uid=:id";
+            if (individualId != null) {
+                Map<String, Object> dataRecord = dataProviderRepository.fetchQueryResult(individualId,
+                        queryString);
+                JSONObject jsonResponse = new JSONObject(dataRecord);
+                log.info("json object: " + jsonResponse);
+                return  jsonResponse.toString();
+            }
+        } catch (Exception e) {
+            log.error("Failed to fetch json data for from data provider plugin", e);
+//            throw new Exception("ERROR_FETCHING_DATA_RECORD_FROM_TABLE");
+        }
+        return "Failed";
     }
 
     @Override

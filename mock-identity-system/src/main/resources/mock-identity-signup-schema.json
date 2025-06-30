@@ -16,7 +16,7 @@
       "alignmentGroup": "groupA"
     },
     {
-      "id": "fullNameInKhmer",
+      "id": "fullName",
       "controlType": "textbox",
       "label": {
         "eng": "Full Name in Khmer",

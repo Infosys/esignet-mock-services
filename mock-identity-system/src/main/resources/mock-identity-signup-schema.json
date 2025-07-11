@@ -1,7 +1,7 @@
 {
     "schema": [
     {
-      "id": "username",
+      "id": "phone",
       "controlType": "phone",
       "label": {
         "en": "Username",

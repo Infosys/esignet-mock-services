@@ -1,22 +1,25 @@
 {
-  "schema": [
+    "schema": [
     {
-      "id": "phone",
-      "controlType": "textbox",
+      "id": "username",
+      "controlType": "phone",
       "label": {
         "en": "Username",
         "km": "ឈ្មោះ​អ្នកប្រើប្រាស់"
       },
       "placeholder": {
-        "eng": "Enter username",
-        "khm": "បញ្ចូលឈ្មោះ​អ្នកប្រើប្រាស់"
+        "eng": "Enter your username",
+        "khm": "សូមបញ្ចូលឈ្មោះអ្នកប្រើប្រាស់"
       },
+      "validators": [],
       "required": false,
       "disabled": true,
+      "prefix": ["+855", "+91"],
       "alignmentGroup": "groupA"
     },
     {
       "id": "fullName",
+      "capsLockCheck": true,
       "controlType": "textbox",
       "label": {
         "eng": "Full Name in Khmer",
@@ -44,18 +47,19 @@
     },
     {
       "id": "password",
+      "capsLockCheck": true,
       "controlType": "password",
       "label": {
         "eng": "Password",
         "khm": "ពាក្យសម្ងាត់"
       },
       "placeholder": {
-        "eng": "Enter Password",
-        "khm": "បញ្ចូលពាក្យសម្ងាត់"
+        "eng": "Enter your password",
+        "khm": "សូមបញ្ចូលពាក្យសម្ងាត់"
       },
       "info": {
-        "eng": "Use 8 or more characters with a mix of alphabets and at least one number.",
-        "khm": "ប្រើតួអក្សរ លាយជាមួយលេខ ឱ្យបានចំនួន8តួឬច្រើនជាងនេះ"
+        "eng": "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+        "khm": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់ ៨ តួអក្សរ មានតួអក្សរធំមួយ តួអក្សរតូចមួយ លេខមួយ និងតួអក្សរពិសេសមួយ។"
       },
       "alignmentGroup": "groupC",
       "required": true
@@ -81,6 +85,10 @@
     "passwordMismatch": {
       "en": "Passwords is not matching please check your password",
       "km": "ពាក្យសម្ងាត់មិនត្រូវគ្នាទេ សូមពិនិត្យពាក្យសម្ងាត់របស់អ្នក"
+    },
+    "capsLock": {
+      "en": "Caps Lock is on",
+      "km": "Caps Lock កំពុងបើក"
     }
   },
   "language": {

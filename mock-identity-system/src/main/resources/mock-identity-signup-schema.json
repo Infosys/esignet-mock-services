@@ -14,7 +14,7 @@
       "validators": [],
       "required": false,
       "disabled": true,
-      "prefix": ["+855", "+91"],
+      "prefix": ["+91"],
       "alignmentGroup": "groupA"
     },
     {

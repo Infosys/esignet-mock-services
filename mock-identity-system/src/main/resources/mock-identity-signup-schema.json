@@ -21,6 +21,7 @@
       "id": "fullName",
       "capsLockCheck": true,
       "controlType": "textbox",
+      "type": "simpleType",
       "label": {
         "eng": "Full Name in Khmer",
         "khm": "គោត្តនាម-នាម"

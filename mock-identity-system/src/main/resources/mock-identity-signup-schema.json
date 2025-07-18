@@ -36,7 +36,16 @@
           "error": {
             "eng": "Full Name has to be in Khmer only",
             "khm": "គោត្តនាម-នាមត្រូវតែមានតែអក្សរខ្មែរ"
-          }
+          },
+          "langCode": "km"
+        },
+        {
+          "regex": "^[a-zA-Z][a-zA-Z ]{1,30}$",
+          "error": {
+            "eng": "Full Name has to be in English only",
+            "khm": "ឈ្មោះ​ពេញ​ត្រូវតែសរសេរជាភាសាអង់គ្លេសតែប៉ុណ្ណោះ"
+          },
+          "langCode": "en" 
         }
       ],
       "info": {

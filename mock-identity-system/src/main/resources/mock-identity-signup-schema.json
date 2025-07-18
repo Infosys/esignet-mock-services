@@ -102,8 +102,8 @@
     }
   },
   "language": {
-    "mandatory": ["eng"],
-    "optional": ["khm"],
+    "mandatory": ["khm"],
+    "optional": ["eng"],
     "langCodeMap": {
       "khm": "km",
       "eng": "en"

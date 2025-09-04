@@ -75,25 +75,6 @@
       "required": true
     },
     {
-        "id": "preferredLang",
-      "controlType": "textbox",
-      "label": {
-            "eng": "Preferred Language",
-            "khm": "ភាសាដែលចូលចិត្ត"
-        },
-      "placeholder": {
-        "eng": "Preferred Language",
-        "khm": "ភាសាដែលចូលចិត្ត"
-      },
-      "info": {
-        "eng": "Preferred language for registration",
-        "khm": "ភាសាដែលពេញចិត្តសម្រាប់ការចុះឈ្មោះ"
-      },
-      "alignmentGroup": "groupE",
-      "required": false,
-      "disabled": true,
-    },
-    {
       "id": "consent",
       "controlType": "checkbox",
       "label": {
@@ -104,9 +85,7 @@
       "alignmentGroup": "groupD"
     }
   ],
-  "allowedValues": {
-      "preferredLang": "khm"
-  },
+  "allowedValues": {},
   "errors": {
     "required": {
       "en": "This field is required",

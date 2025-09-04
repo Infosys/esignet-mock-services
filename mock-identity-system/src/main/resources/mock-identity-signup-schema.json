@@ -1,5 +1,5 @@
 {
-    "schema": [
+  "schema": [
     {
       "id": "phone",
       "controlType": "phone",
@@ -45,7 +45,7 @@
             "eng": "Full Name has to be in English only",
             "khm": "ឈ្មោះ​ពេញ​ត្រូវតែសរសេរជាភាសាអង់គ្លេសតែប៉ុណ្ណោះ"
           },
-          "langCode": "en" 
+          "langCode": "en"
         }
       ],
       "info": {
@@ -75,6 +75,20 @@
       "required": true
     },
     {
+      "id": "preferredLang",
+      "controlType": "textbox",
+      "label": {
+        "eng": "Preferred Lang",
+        "khm": "ភាសាដែលចូលចិត្ត"
+      },
+      "info": {
+        "eng": "Preferred Lang",
+        "khm": "ភាសាដែលចូលចិត្ត"
+      },
+      "required": false,
+      "disabled": true
+    },
+    {
       "id": "consent",
       "controlType": "checkbox",
       "label": {
@@ -85,7 +99,9 @@
       "alignmentGroup": "groupD"
     }
   ],
-  "allowedValues": {},
+  "allowedValues": {
+    "preferredLang": "khm"
+  },
   "errors": {
     "required": {
       "en": "This field is required",

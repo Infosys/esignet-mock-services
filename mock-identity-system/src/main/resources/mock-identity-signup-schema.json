@@ -76,12 +76,22 @@
     },
     {
         "id": "preferredLang",
-        "controlType": "textbox",
-        "label": {
+      "controlType": "textbox",
+      "label": {
             "eng": "Preferred Language",
             "khm": "ភាសាដែលចូលចិត្ត"
         },
-        "alignmentGroup": "groupE",
+      "placeholder": {
+        "eng": "Preferred Language",
+        "khm": "ភាសាដែលចូលចិត្ត"
+      },
+      "info": {
+        "eng": "Preferred language for registration",
+        "khm": "ភាសាដែលពេញចិត្តសម្រាប់ការចុះឈ្មោះ"
+      },
+      "alignmentGroup": "groupE",
+      "required": false,
+      "disabled": true,
     },
     {
       "id": "consent",

@@ -75,6 +75,15 @@
       "required": true
     },
     {
+        "id": "preferredLang",
+        "controlType": "textbox",
+        "label": {
+            "eng": "Preferred Language",
+            "khm": "ភាសាដែលចូលចិត្ត"
+        },
+        "alignmentGroup": "groupE",
+    },
+    {
       "id": "consent",
       "controlType": "checkbox",
       "label": {
@@ -85,7 +94,9 @@
       "alignmentGroup": "groupD"
     }
   ],
-  "allowedValues": {},
+  "allowedValues": {
+      "preferredLang": "khm"
+  },
   "errors": {
     "required": {
       "en": "This field is required",

@@ -8,15 +8,11 @@ package io.mosip.esignet.mock.identitysystem.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.mosip.esignet.mock.identitysystem.dto.*;
 import io.mosip.esignet.mock.identitysystem.service.impl.AuthenticationServiceImpl;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -27,8 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(value = AuthController.class)
+@WebMvcTest(AuthController.class)
 public class AuthControllerTest {
 
     @MockBean
@@ -36,11 +31,6 @@ public class AuthControllerTest {
 
     @Autowired
     MockMvc mockMvc;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void kycAuth_withValidDetails_thenPass() throws Exception {

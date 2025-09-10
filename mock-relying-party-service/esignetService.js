@@ -7,12 +7,16 @@ const {
 } = require("./config");
 
 const clientDetails = require("./clientDetails");
-const { generateSignedJwt, generateRandomString, decodeUserInfoResponse } = require("./utils");
+const {
+  generateSignedJwt,
+  generateRandomString,
+  decodeUserInfoResponse,
+  generateDpopJKT,
+} = require("./utils");
 
 const baseUrl = ESIGNET_SERVICE_URL.trim();
 const getTokenEndPoint = "/oauth/v2/token";
 const getUserInfoEndPoint = "/oidc/userinfo";
-const getOidcConfigurationEndpoint = "/.well-known/openid-configuration";
 
 /**
  * Triggers /oauth/v2/token API on esignet service to fetch access token
@@ -45,10 +49,15 @@ const post_GetToken = async ({ code, client_id, redirect_uri, grant_type }) => {
  * @param {string} clientId clientId
  * @returns requestUri
  */
-const post_GetRequestUri = async (clientId, uiLocales, state) => {
+const post_GetRequestUri = async (
+  clientId,
+  uiLocales,
+  state,
+  dpop_jkt = null
+) => {
   const clientAssertion = await generateSignedJwt(
     clientId,
-    ESIGNET_PAR_AUD_URL,
+    ESIGNET_PAR_AUD_URL
   );
   const params = new URLSearchParams();
   params.append("nonce", generateRandomString());
@@ -65,9 +74,13 @@ const post_GetRequestUri = async (clientId, uiLocales, state) => {
   params.append("ui_locales", uiLocales || process.env.DEFAULT_UI_LOCALES);
   params.append("client_assertion_type", CLIENT_ASSERTION_TYPE);
   params.append("client_assertion", clientAssertion);
-  const response = await axios.post(clientDetails.parEndpoint, params.toString(), {
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  });
+  const response = await axios.post(
+    clientDetails.parEndpoint,
+    params.toString(),
+    {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    }
+  );
   return response.data;
 };
 
@@ -86,20 +99,22 @@ const get_GetUserInfo = async (access_token) => {
   return decodeUserInfoResponse(response.data);
 };
 
-const get_dpopKeyAlgo = async () => {
-  const endpoint = getBaseUrl(baseUrl) + getOidcConfigurationEndpoint;
-  const response = await axios.get(endpoint);
-  return response?.data?.dpop_signing_alg_values_supported;
-};
+/**
+ * Generate a public private key pair and store
+ * in-memory cache and then return the dpop jkt
+ * @param {string} clientId client id for the flow
+ * @param {string} state state of the current flow
+ * @returns {Object} a thumbprint of the dpop as dpop_jkt
+ */
+const get_dpopJKT = async (clientId, state) => {
+  const dpopJKT = await generateDpopJKT(clientId, state);
 
-const getBaseUrl = (serviceUrl) => {
-  const url = new URL(serviceUrl.trim());
-  return `${url.protocol}//${url.host}`;
-}
+  return dpopJKT;
+};
 
 module.exports = {
   post_GetToken,
   get_GetUserInfo,
   post_GetRequestUri,
-  get_dpopKeyAlgo,
+  get_dpopJKT,
 };

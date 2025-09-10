@@ -35,5 +35,7 @@ const cache = {
     delete this.store[key];
   },
 };
+const NodeCache = require("node-cache");
+const dpopCache = new NodeCache({ stdTTL: 600 });
 
-module.exports = cache;
+module.exports = {cache, dpopCache};

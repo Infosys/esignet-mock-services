@@ -72,7 +72,7 @@
     },
     {
       "id": "fullName",
-      "controlType": "texbox",
+      "controlType": "textbox",
       "label": {
         "eng": "Full Name",
         "hin": "पूरा नाम",

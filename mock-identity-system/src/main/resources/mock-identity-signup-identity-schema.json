@@ -63,12 +63,27 @@
     "dob": {
       "type": "string",
       "pattern": "\\S"
+    },
+    "preferredLang": {
+        "bioAttributes": [],
+        "validators": [
+            {
+                "validator": "(^eng$|^khm$)",
+                "arguments": [],
+                "type": "regex"
+            }
+        ],
+        "fieldCategory": "pvt",
+        "format": "none",
+        "type": "string",
+        "fieldType": "dynamic"
     }
   },
   "required": [
     "fullName",
     "password",
-    "phone"
+    "phone",
+    "preferredLang"
   ],
   "additionalProperties": true
 }

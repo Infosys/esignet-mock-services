@@ -91,7 +91,7 @@ The mock relying party backend exposes the following endpoints, which are used b
 
 - **`/fetchUserInfo`**  
   Exchanges the authorization code for an access token and retrieves the user’s information from MOSIP Esignet.
-  Invoked after the user is redirected back to the relying party with the authorization code.
+  Invoked after the user is redirected back to the relying party with authorization code.
 
 - **`/requestUri`**  
   Used in the [Pushed Authorization Request (PAR)](https://datatracker.ietf.org/doc/html/rfc9126) flow.  

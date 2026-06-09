@@ -1,4 +1,4 @@
-FROM node:16.13.2-alpine as build
+FROM node:20-alpine3.21 as build
 
 # can be passed during Docker build as build time environment
 ARG esignet_service_url

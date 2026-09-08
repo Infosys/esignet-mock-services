@@ -237,7 +237,7 @@
     },
     "phone": {
       "type": "string",
-      "pattern": "\\S"
+      "pattern": "^\\+9\\d{9,10}$"
     },
     "zoneInfo": {
       "type": ["string", "null"]
